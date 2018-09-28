@@ -49,4 +49,26 @@ public class PartidaXadrez {
 	private void lugarNovoPeca(char coluna, int linha, Peca peca) {
 		tabuleiro.posicaoPeca(peca, new XadrezPosicao(coluna, linha).paraPosicao());
 	}
+	
+	public PecaXadrez movimentoXadrezPeca(XadrezPosicao origem, XadrezPosicao destino) {
+		Posicao posicao = origem.paraPosicao();
+		Posicao alvo = destino.paraPosicao();
+		validaPosicaoOrigem(posicao);
+		Peca capturaPeca = mover(posicao, alvo);
+		return (PecaXadrez) capturaPeca;
+		
+	}
+
+	private Peca mover(Posicao origem, Posicao alvo) {
+		Peca peca = tabuleiro.removePeca(origem);
+		Peca capturada = tabuleiro.removePeca(alvo);
+		tabuleiro.posicaoPeca(peca, alvo);
+		return null;
+	}
+
+	private void validaPosicaoOrigem(Posicao posicao) {
+		if(!tabuleiro.verificaPecaPosicao(posicao)) {
+			throw new XadrezExcecao("Não existe peca na posicao de origem");
+		}
+	}
 }

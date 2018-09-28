@@ -1,7 +1,11 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import xadrez.Cor;
 import xadrez.PecaXadrez;
+import xadrez.XadrezPosicao;
 
 public class UI {
 
@@ -48,5 +52,16 @@ public class UI {
             }
         }
         System.out.print(" ");
+	}
+	
+	public static XadrezPosicao lerXadrezPosicao(Scanner s) {
+		try {
+			String st = s.nextLine();
+			char coluna = st.charAt(0);
+			int linha = Integer.parseInt(st.substring(1));
+			return new XadrezPosicao(coluna, linha);
+		}catch (RuntimeException e) {
+			throw new InputMismatchException("Erro na posição do Xadrez, possição correta a1 até h8");
+		}
 	}
 }

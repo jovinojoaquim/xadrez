@@ -85,4 +85,18 @@ public class Tabuleiro {
 	public boolean verificaPecaPosicao (Posicao posicao) {
 		return peca(posicao)!= null;		
 	}
+	
+	public Peca removePeca(Posicao posicao) {
+		if(!posicaoExiste(posicao)) {
+			throw new TabuleiroExcecao("Posição não existente");
+		}
+		if(peca(posicao) == null) {
+			return null;
+		}
+		Peca aux = peca(posicao);
+		aux.posicao = null;
+		pecas[posicao.getLinha()][posicao.getColuna()] = null;
+		return aux;
+	
+	}
 }
