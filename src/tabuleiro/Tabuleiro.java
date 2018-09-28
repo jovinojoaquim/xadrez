@@ -34,4 +34,14 @@ public class Tabuleiro {
 	public Peca peca (Posicao posicao) {
 		return pecas[posicao.getLinha()][posicao.getColuna()];
 	}
+	
+	/**
+	 * Método Respnsável por definir a nova posição(movimentar) a peça no tabuleiro
+	 * @param peca Peca que será movimentada
+	 * @param posicao Nova posição da Peça
+	 */
+	public void posicaoPeca(Peca peca, Posicao posicao) {
+		pecas[posicao.getLinha()][posicao.getColuna()] = peca;
+		peca.posicao = posicao;
+	}
 }
