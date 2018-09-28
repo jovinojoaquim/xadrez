@@ -6,6 +6,9 @@ public class Tabuleiro {
 	private Peca[][] pecas;
 
 	public Tabuleiro(int linhas, int colunas) {
+		if(linhas < 1 || colunas < 1) {
+			throw new TabuleiroExcecao("Erro ao criar um tabuleiro, é necessário ao menos uma linha e uma coluna");
+		}
 		this.linhas = linhas;
 		this.colunas = colunas;
 		pecas = new Peca[linhas][colunas];
@@ -15,23 +18,31 @@ public class Tabuleiro {
 		return linhas;
 	}
 
-	public void setLinhas(int linhas) {
-		this.linhas = linhas;
-	}
-
 	public int getColunas() {
 		return colunas;
 	}
 
-	public void setColunas(int colunas) {
-		this.colunas = colunas;
-	}
-	
+	/**
+	 * Retorna a peça que tem na determinada posição
+	 * @param posicao posicao que será verificada a existencia da peca
+	 * @return
+	 */
 	public Peca peca (int linha, int coluna) {
+		if(!posicaoExiste(linha, coluna)) {
+			throw new TabuleiroExcecao("Posição não existente");
+		}
 		return pecas[linha][coluna];
 	}
 	
+	/**
+	 * Retorna a peça que tem na determinada posição
+	 * @param posicao posicao que será verificada a existencia da peca
+	 * @return
+	 */
 	public Peca peca (Posicao posicao) {
+		if(!posicaoExiste(posicao)) {
+			throw new TabuleiroExcecao("Posição não existente");
+		}
 		return pecas[posicao.getLinha()][posicao.getColuna()];
 	}
 	
@@ -41,7 +52,37 @@ public class Tabuleiro {
 	 * @param posicao Nova posição da Peça
 	 */
 	public void posicaoPeca(Peca peca, Posicao posicao) {
+		if(verificaPecaPosicao(posicao)) {
+			throw new TabuleiroExcecao("Existe uma peça nessa posição");
+		}
 		pecas[posicao.getLinha()][posicao.getColuna()] = peca;
 		peca.posicao = posicao;
+	}
+	
+	/**
+	 * Retorna se existe uma posiçao inserida pelo usuário
+	 * @param posicao posicao que será verificada a existencia da peca
+	 * @return
+	 */
+	public boolean posicaoExiste(Posicao posicao) {
+		return posicaoExiste(posicao.getLinha(), posicao.getColuna());
+	}
+	
+	/**
+	 * Retorna se existe uma posição inseria pelo usuário
+	 * @param linha 
+	 * @param coluna
+	 * @return
+	 */
+	private boolean posicaoExiste(int linha, int coluna) {
+		if(linha >=0 && linha < linhas && coluna >=0 && coluna < colunas) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public boolean verificaPecaPosicao (Posicao posicao) {
+		return peca(posicao)!= null;		
 	}
 }

@@ -26,8 +26,11 @@ public class PartidaXadrez {
 		return partida;
 	}
 	
+	/**
+	 * Método Responsável por inicializar as peças no tabuleiro
+	 */
 	private void inicioPartida() {
-		tabuleiro.posicaoPeca(new Torre(tabuleiro, Cor.BRANCO), new Posicao(2, 1));
+		tabuleiro.posicaoPeca(new Torre(tabuleiro, Cor.BRANCO), new Posicao(0, 7));
 		tabuleiro.posicaoPeca(new Rei(tabuleiro, Cor.PRETO), new Posicao(0,4));
 		tabuleiro.posicaoPeca(new Rei(tabuleiro, Cor.BRANCO), new Posicao(7,4));
 	}
