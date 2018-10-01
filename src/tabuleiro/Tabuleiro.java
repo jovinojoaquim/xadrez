@@ -83,6 +83,9 @@ public class Tabuleiro {
 	}
 	
 	public boolean verificaPecaPosicao (Posicao posicao) {
+		if(!posicaoExiste(posicao)) {
+			throw new TabuleiroExcecao("Posição não existe");
+		}
 		return peca(posicao)!= null;		
 	}
 	
